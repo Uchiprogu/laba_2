@@ -10,11 +10,39 @@
 #include  <iterator>
 #include  <algorithm>
 using namespace std;
-void /*vector<string>*/ input(string str);
+vector<string> input(string str);
 void updateStr(string& str);
 void removeStr(string& str, int K);
 void updateKey(string& str);
+void fillingKey(string& key, vector<string>& TablStr);
 void print(const string& str);
+string fillLetters(string key, string& tmp);
+
+
+struct Index
+{
+	int Row;
+	int Col;
+
+	Index(int row, int col)
+	{
+		Row = row;
+		Col = col;
+	}
+
+	Index NextRow()
+	{
+		int r = (Row + 1) % 5;
+		return Index(r, Col);
+	}
+
+	Index NextCol()
+	{
+		int c = (Col + 1) % 5;
+		return Index(Row, c);
+	}
+};
+
 int main()
 {
 	string str = "IDIOCY_OFTEN_LOOKS_LIKE_INTELLIGENCE";
@@ -22,11 +50,14 @@ int main()
 	print(key);
 	//updateStr(str);
 	updateKey(key);
-	print(key);
-	//input( str);
+	//print(key);
+	vector<string> Text;
+	vector<string> KeyTable;
+	//Text = input( str);
+	fillingKey(key, KeyTable);
 	return 0;
 }
-void /*vector<string>*/ input(string str)
+vector<string> input(string str)
 {
 
 	int size = str.size();
@@ -50,7 +81,7 @@ void /*vector<string>*/ input(string str)
 		tmp.erase();
 		tmp.erase();
 	}
-
+	return v;
 }
 
 void updateStr(string& str)
@@ -75,6 +106,34 @@ void print(const string& str)
 	cout << "-----------" << endl;
 
 }
+string fillLetters(string key, string& tmp)
+{
+	string tmp_2;
+	bool duplicateCharacter = 0;
+	int Symbol = 65;
+	int sizeKey = key.size();
+	for (int i = 0; i < 25; i++)
+	{
+		for (int j = 0; j < sizeKey; j++)
+		{
+			if (Symbol == 90)
+				break;
+			if (key[j] == Symbol)
+			{
+				duplicateCharacter = 1;
+			}
+		}
+		if(duplicateCharacter == 0)
+			tmp_2.push_back(Symbol);
+		duplicateCharacter = 0;
+		if (Symbol != 80)
+			Symbol++;
+		else
+			Symbol = Symbol + 2;
+	}
+	tmp_2 = tmp + tmp_2;
+	return tmp_2;
+}
 void updateKey(string& str)
 {
 	int size = str.size();
@@ -88,6 +147,51 @@ void updateKey(string& str)
 		[&](char c) { return !std::count(str.begin(), iter++, c); });
 	//print(tmp);
 	str = tmp;
+}
+void fillingKey(string& key, vector<string>& TablStr)
+{
+	int SizeKey = key.size() -1;
+	int remainderOfDivision = key.size() % 5;
+	string tmp, tmp_2;
+	int tmpSize = 0;
+	bool stop = 0;
+	for (int i = 0; i < 5; i++)
+	{
+		for (int j = 0; j < 5; j++, SizeKey--)
+		{
+			if (SizeKey > -1)
+			{
+				if (stop == 0)
+				{
+					if(i == 0)
+						tmp.push_back(key[j]);
+					else
+					{
+						if(remainderOfDivision == 0)
+							tmp.push_back(key[j + i*5]);
+						else
+						{
+							tmp.push_back(key[j + i * 5]);
+							//fill the rest of the letters
+							tmp_2 = fillLetters(key, tmp);
+							break;
+							/*if (tmpSize > tmp_2.size() / 5)
+								break;
+							tmp.clear();
+							for (int i = 0; i < 5; i++)
+							{
+								tmp.push_back(tmp_2[i + tmpSize * 5]);
+							}*/
+						}
+					}
+				}
+					
+			}
+		}
+		//print(tmp_2);
+		TablStr.push_back(tmp);
+		tmpSize++;
+	}
 }
 void removeStr(string& str, int K)
 {

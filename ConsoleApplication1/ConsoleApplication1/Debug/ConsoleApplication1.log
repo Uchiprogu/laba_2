@@ -1,4 +1,4 @@
 ﻿  ConsoleApplication1.cpp
-d:\kostia\projects\laba_2\consoleapplication1\consoleapplication1\consoleapplication1.cpp(70): warning C4018: <: несоответствие типов со знаком и без знака
-d:\kostia\projects\laba_2\consoleapplication1\consoleapplication1\consoleapplication1.cpp(95): warning C4018: <: несоответствие типов со знаком и без знака
+d:\kostia\projects\laba_2\consoleapplication1\consoleapplication1\consoleapplication1.cpp(101): warning C4018: <: несоответствие типов со знаком и без знака
+d:\kostia\projects\laba_2\consoleapplication1\consoleapplication1\consoleapplication1.cpp(199): warning C4018: <: несоответствие типов со знаком и без знака
   ConsoleApplication1.vcxproj -> D:\Kostia\Projects\laba_2\ConsoleApplication1\Debug\ConsoleApplication1.exe
