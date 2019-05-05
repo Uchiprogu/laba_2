@@ -17,6 +17,7 @@ void updateKey(string& str);
 void fillingKey(string& key, vector<string>& TablStr);
 void print(const string& str);
 void printInput(vector<string>& Text);
+void printInputM(vector<string>& Text);
 void encode(vector<string>& Text,const vector<string> key);
 void dencode(vector<string>& Text, const vector<string> key);
 string fillLetters(string key, string& tmp);
@@ -27,8 +28,11 @@ string fillLetters(string key, string& tmp);
 int main()
 {
 	string str = "IDIOCY OFTEN LOOKS LIKE INTELLIGENCE";
-	string key = "WHEATSTONE";
-	//print(key);
+
+	string key;// = "WHEATSTONE";
+	getline(cin, key);
+	print(key);
+	print(str);
 	updateStr(str);
 	updateKey(key);
 	//print(str);
@@ -37,7 +41,8 @@ int main()
 	Text = input( str);
 	fillingKey(key, KeyTable);
 
-	//printInput(KeyTable);
+	printInputM(KeyTable);
+
 	printInput(Text);
 	cout << endl;
 	encode(Text, KeyTable);
@@ -118,6 +123,15 @@ void printInput(vector<string>& Text)
 		for (int j = 0; j < Text.at(i).size(); j++)
 			cout << Text.at(i)[j];
 		cout << " ";
+	}
+}
+void printInputM(vector<string>& Text)
+{
+	for (int i = 0; i < Text.size(); i++)
+	{
+		for (int j = 0; j < Text.at(i).size(); j++)
+			cout << Text.at(i)[j];
+		cout << endl;
 	}
 }
 void encode(vector<string>& Text, const vector<string> key)
@@ -476,13 +490,3 @@ void fillingKey(string& key, vector<string>& TablStr)
 	}
 	
 }
-/*void removeStr(string& str, int K)
-{
-	string Buff;
-	for (int i = 0; i < str.size(); i++)
-	{
-		if (i != K)
-			Buff.push_back(str[i]);
-	}
-	str = Buff;
-}*/
